@@ -30,7 +30,7 @@ ECHO=/bin/echo
 # Compile with perl libraries?
 # Shut up the compiler about something caused by perl 5.6
 PERL=/usr/bin/perl
-PERL_CPPFLAGS= -I/usr/lib/x86_64-linux-gnu/perl/5.24/CORE  -Wno-unused
+PERL_CPPFLAGS= -I/usr/lib/x86_64-linux-gnu/perl/5.26/CORE  -Wno-unused
 PERL_LDFLAGS=-Wl,-E  -fstack-protector-strong -L/usr/local/lib  -L/usr/lib/x86_64-linux-gnu/ -lperl -ldl -lm -lpthread -lc -lcrypt
 
 # Compile with python libraries?

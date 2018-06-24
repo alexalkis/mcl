@@ -149,7 +149,7 @@ Plugin * Plugin::loadPlugin(const char *filename, const char *args) {
     
     if (!(handle = dlopen(buf, RTLD_LAZY|RTLD_GLOBAL)))
         error ("Error loading %s: %s\n", buf, dlerror());
-    
+
     Plugin *plugin = new Plugin(buf, handle);
     plugins.insert(plugin);
     
@@ -212,6 +212,7 @@ void Plugin::loadPlugins(const char *plugins) {
     const char *s = plugins;
     char *out;
 
+
     // module_name [args], module_name [args]...
     for (;*s;) {
         while (isspace(*s))
@@ -235,6 +236,7 @@ void Plugin::loadPlugins(const char *plugins) {
             s++;
 
         loadPlugin(Sprintf("%s.so", module_name), module_args);
+
     }
 }
 

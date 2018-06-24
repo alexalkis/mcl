@@ -12,11 +12,11 @@ extern "C" EmbeddedInterpreter *createInterpreter() {
 }
 
 extern "C" const char* initFunction(const char *) {
-    return NULL;
+    return nullptr;
 }
 
 extern "C" const char* versionFunction() {
-    return "Perl embedded interprter";
+    return "Perl embedded interpreter";
 }
 
 
@@ -30,9 +30,11 @@ extern "C" {
 
 #define my_perl perl_interp
 
-static void xs_init(pTHX)
+//EXTERN_C
+static
+void xs_init(pTHX)
 {
-    char *file = __FILE__;
+    const char *file = __FILE__;
     /* DynaLoader is a special case */
     newXS("DynaLoader::boot_DynaLoader", boot_DynaLoader, file);
 //    newXS("Socket::bootstrap", boot_Socket, file);
@@ -43,7 +45,7 @@ PerlEmbeddedInterpreter::PerlEmbeddedInterpreter() {
     perl_interp = perl_alloc();
     perl_construct((PerlInterpreter*)perl_interp);
     
-    char *args[] = {"mclInternalPerlInterpreter", "-w", "-e", ""};
+    char *args[] = {(char *)"mclInternalPerlInterpreter", (char *)"-w", (char *)"-e", (char *)""};
     if ((perl_parse(perl_interp, xs_init, 4, args, __environ)))
         error ("perl_parse error - exiting");
 
