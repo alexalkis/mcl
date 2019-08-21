@@ -93,7 +93,7 @@ set(SOURCE_FILES
 
 
 add_executable(mcl ${SOURCE_FILES})
-set_target_properties(mcl PROPERTIES LINK_FLAGS "-s -rdynamic")
+set_target_properties(mcl PROPERTIES LINK_FLAGS "-rdynamic")
 
 target_link_libraries(mcl
         ncurses

@@ -201,8 +201,10 @@ bool MUDSelection::keypress(int key) {
 	if ((key == 'a' || key == key_alt_a) && getSelection() < getCount()) {
 		char buf[256];
 		MUD *mud = (*config->mud_list)[getSelection()];
-		snprintf(buf,256,"Aliases for MUD %s (%s %d)", ~mud->name, mud->getHostname(),mud->getPort());
-		(void)new AliasSelection(screen, mud, buf);
+		if (mud) {
+          snprintf(buf, 256, "Aliases for MUD %s (%s %d)", ~mud->name, mud->getHostname(), mud->getPort());
+          (void) new AliasSelection(screen, mud, buf);
+        }
 	}
 	else if (key == key_alt_o)
 		status->setf("It's already open!");
