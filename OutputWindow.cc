@@ -290,8 +290,9 @@ void OutputWindow::printVersion()
             "Copyright (C) 1997-2000 Erwin S. Andreasen <erwin@andreasen.org>\n"
             "mcl comes with ABSOLUTELY NO WARRANTY; for details, see file COPYING\n"
             "This binary compiled: " __DATE__ ", " __TIME__ " by " COMPILED_BY ".\n"
-            "Binary/source available from http://www.andreasen.org/mcl/\n",
-            versionToString(VERSION)
+            "Binary/source available from http://www.andreasen.org/mcl/\n"
+            "Aaaand welcome to 2019! :) Source code attempting to use cmake at https://github.com/alexalkis/mcl\n"
+            ,versionToString(VERSION)
            );
 
     if (screen->isVirtual())
