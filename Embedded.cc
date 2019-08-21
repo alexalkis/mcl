@@ -205,6 +205,7 @@ void Plugin::displayLoadedPlugins() {
     }
 }
 
+//#include <iostream>
 // Load all plugins
 void Plugin::loadPlugins(const char *plugins) {
     char module_name[INPUT_SIZE];
@@ -212,7 +213,7 @@ void Plugin::loadPlugins(const char *plugins) {
     const char *s = plugins;
     char *out;
 
-
+    //std::cerr << "ALKIS: " << plugins << "\n";
     // module_name [args], module_name [args]...
     for (;*s;) {
         while (isspace(*s))

@@ -628,7 +628,7 @@ Config::Config (const char *fname) {
         setOption (option_table[i].option, option_table[i].default_value);
 
     // Move this later to a table once there is more than one string option
-    setStringOption(opt_plugins, "perl");
+    setStringOption(opt_plugins, "perl,python");
     setStringOption(opt_chat_download, Sprintf("%s/.mcl/downloads/", getenv("HOME")));
     setStringOption(opt_chat_interfaces, "ppp0 eth0 lo");
 
