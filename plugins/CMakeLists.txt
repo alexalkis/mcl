@@ -35,7 +35,7 @@ add_custom_command(TARGET mperl POST_BUILD
         COMMENT "Copying perl.so to output directory")
 
 target_link_libraries(mpython
-        ${Python_LIBRARIES})
+        ${Python2_LIBRARIES})
 
 add_custom_command(TARGET mpython POST_BUILD
         COMMAND "${CMAKE_COMMAND}" -E copy
