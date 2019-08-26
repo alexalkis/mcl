@@ -7,12 +7,12 @@ set(pythonSrc PythonEmbeddedInterpreter.cc)
 
 FIND_PACKAGE(PkgConfig)
 include_directories (${PKGS_INCLUDE_DIRS})
-include_directories(../includes)
-include_directories(/usr/lib/x86_64-linux-gnu/perl/5.26.1/CORE/)
-include_directories(/usr/include/python2.7/)
+include_directories(../includes ${Python_INCLUDE_DIRS})
 
 add_library(mperl SHARED ${perlSrc})
 add_library(mpython SHARED ${pythonSrc})
+
+#message( "What?"  ${Python_LIBRARIES})
 
 set_target_properties(mperl PROPERTIES PREFIX "")
 set_target_properties(mpython PROPERTIES PREFIX "")
@@ -29,7 +29,7 @@ add_custom_command(TARGET mperl POST_BUILD
         COMMENT "Copying perl.so to output directory")
 
 target_link_libraries(mpython
-        python2.7)
+        ${Python_LIBRARIES})
 
 add_custom_command(TARGET mpython POST_BUILD
         COMMAND "${CMAKE_COMMAND}" -E copy

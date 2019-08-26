@@ -189,8 +189,10 @@ bool PythonEmbeddedInterpreter::match(void *code, const char *match_str,
   char *str;
 
   set("default_var", match_str);
-  
-  if(!(PyEval_EvalCode((PyCodeObject*)code, globals, globals))) {
+
+  ///ALKIS change for python3
+  ///if(!(PyEval_EvalCode((PyCodeObject*)code, globals, globals))) {
+  if(!(PyEval_EvalCode((PyObject*)code, globals, globals))) {
     report("@@ Error evaluating match or substitute code:\n");
     PyErr_Print();
     return false;

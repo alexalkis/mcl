@@ -5,8 +5,10 @@ project(mcl)
 
 FIND_PACKAGE(PerlLibs)
 
-#message( ${PERL_INCLUDE_PATH})
+find_package(Python COMPONENTS Development)
 
+message( "Main cmakefile Perl includes: " ${PERL_INCLUDE_PATH})
+message( "Main cmakefile Python library: "  ${Python_LIBRARIES})
 #find_package(SQLite3 REQUIRED)
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
