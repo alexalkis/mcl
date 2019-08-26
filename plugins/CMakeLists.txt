@@ -7,20 +7,26 @@ set(pythonSrc PythonEmbeddedInterpreter.cc)
 
 FIND_PACKAGE(PkgConfig)
 include_directories (${PKGS_INCLUDE_DIRS})
-include_directories(../includes ${Python_INCLUDE_DIRS})
+include_directories(../includes ${Python2_INCLUDE_DIRS})
 
-add_library(mperl SHARED ${perlSrc})
+
 add_library(mpython SHARED ${pythonSrc})
+add_library(mperl SHARED ${perlSrc})
 
 #message( "What?"  ${Python_LIBRARIES})
 
 set_target_properties(mperl PROPERTIES PREFIX "")
 set_target_properties(mpython PROPERTIES PREFIX "")
 
+execute_process(COMMAND ${PERL_EXECUTABLE} -MExtUtils::Embed -e ldopts OUTPUT_VARIABLE PERL_LINKER_FLAGS OUTPUT_STRIP_TRAILING_WHITESPACE)
+message("perl-link-variable: " ${PERL_LINKER_FLAGS})
+message("perl-variable: " ${PERL_LIBRARY})
 # perl -MExtUtils::Embed -e ldopts
-set_target_properties(mperl PROPERTIES LINK_FLAGS "-s -rdynamic -shared -Wl,-E  -fstack-protector-strong -L/usr/local/lib  -L/usr/lib/x86_64-linux-gnu/ -lperl -ldl -lm -lpthread -lc -lcrypt")
-target_link_libraries(mperl
-        perl)
+#set_target_properties(mperl PROPERTIES LINK_FLAGS "-s -rdynamic -shared -Wl,-E  -fstack-protector-strong -L/usr/local/lib  -L/usr/lib/x86_64-linux-gnu/ -lperl -ldl -lm -lpthread -lc -lcrypt")
+set_target_properties(mperl PROPERTIES LINK_FLAGS "-s -rdynamic -shared ${PERL_LINKER_FLAGS}")
+target_link_libraries(mperl ${PERL_LIBRARY})
+
+
 
 add_custom_command(TARGET mperl POST_BUILD
         COMMAND "${CMAKE_COMMAND}" -E copy

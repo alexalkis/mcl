@@ -3,12 +3,16 @@ cmake_minimum_required(VERSION 3.7)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 project(mcl)
 
-FIND_PACKAGE(PerlLibs)
+### Check Perl headers and libs ###
+find_package(Perl REQUIRED)
+find_package(PerlLibs REQUIRED)
+#find_package(PerlModules COMPONENTS ExtUtils::Embed REQUIRED)
+#FIND_PACKAGE(PerlLibs)
 
-find_package(Python COMPONENTS Development)
+find_package(Python2 COMPONENTS Development)
 
 message( "Main cmakefile Perl includes: " ${PERL_INCLUDE_PATH})
-message( "Main cmakefile Python library: "  ${Python_LIBRARIES})
+message( "Main cmakefile Python library: "  ${Python2_LIBRARIES})
 #find_package(SQLite3 REQUIRED)
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 

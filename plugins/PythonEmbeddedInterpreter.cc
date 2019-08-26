@@ -191,8 +191,11 @@ bool PythonEmbeddedInterpreter::match(void *code, const char *match_str,
   set("default_var", match_str);
 
   ///ALKIS change for python3
-  ///if(!(PyEval_EvalCode((PyCodeObject*)code, globals, globals))) {
+#if PY_MAJOR_VERSION >= 3
   if(!(PyEval_EvalCode((PyObject*)code, globals, globals))) {
+#else
+  if(!(PyEval_EvalCode((PyCodeObject*)code, globals, globals))) {
+#endif
     report("@@ Error evaluating match or substitute code:\n");
     PyErr_Print();
     return false;
