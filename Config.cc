@@ -268,6 +268,12 @@ static const char *obsolete_options[] = {
 };
     
 
+bool Config::doesFolderExist(const char *path) {
+    struct stat folder_st;
+
+    return stat(path, &folder_st) == 0 && S_ISDIR(folder_st.st_mode);
+}
+
 // Load the config file. if fname = NULL, default to ~/.mclrc
 void    Config::Load (const char *fname)
 {
@@ -303,8 +309,10 @@ void    Config::Load (const char *fname)
             fprintf (stderr, "I will create the directory %s/.mcl for you and a sample configuration file inside it.\n", home);
             fprintf (stderr, "When you leave mcl, the file will contain all the default settings.\n");
             sprintf(buf, "%s/.mcl", home);
-            if (mkdir(buf ,0700) < 0)
-                error("I failed creating the directory. I give up now (%m)!\n");
+            if (!doesFolderExist(buf)) {
+                if (mkdir(buf, 0700) < 0)
+                    error("I failed creating the directory. I give up now (%m)!\n");
+            }
             sprintf(buf, "%s/.mcl/mclrc", home);
             if (!(fp = fopen(buf, "w")))
                 error("I failed (%m). I give up now.\n");

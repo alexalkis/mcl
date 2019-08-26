@@ -1,13 +1,18 @@
 cmake_minimum_required(VERSION 3.7)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+project(mcl)
+
+FIND_PACKAGE(PerlLibs)
+
+#message( ${PERL_INCLUDE_PATH})
 
 #find_package(SQLite3 REQUIRED)
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
-project(mcl)
+
 set(CMAKE_CXX_STANDARD 11)
-include_directories(includes)
+include_directories(includes ${PERL_INCLUDE_PATH})
 set(SOURCE_FILES
     includes/Action.h
     includes/Alias.h

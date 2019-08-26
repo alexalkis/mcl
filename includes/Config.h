@@ -98,6 +98,7 @@ class Config {
 	
     time_t save_time;					// When was .mclrc last modifed?
 
+    bool doesFolderExist(const char *path);
 };// *config;
 
 extern "C" {
