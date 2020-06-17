@@ -224,27 +224,27 @@ int main(int argc, char **argv) {
         
         if (currentSession) {
             if (opt_copyover_value) {
-                *arg++ = "-@";
+                *arg++ = (char *) "-@";
                 *arg++ = fd_buf;
             } else {
                 close(session_fd);
             }
             
             *arg++ = (char*)~lastMud->name;
-            *arg++ = NULL;
+            *arg++ = nullptr;
         }
 
-        *arg = NULL;
+        *arg = nullptr;
         
         signal (SIGPROF, SIG_IGN);		
         execv(argv[0], temp_arg);
         
         // Don't try this at home
-        temp_arg[0] = "/root/ed/mcl/mcl";
+        temp_arg[0] = (char *) "/root/ed/mcl/mcl";
         execv(argv[0], temp_arg);
         
         // OK, last attempt. path.
-        temp_arg[0] = "mcl";
+        temp_arg[0] = (char *) "mcl";
         execvp(argv[0], temp_arg);
         
         perror ("exec");

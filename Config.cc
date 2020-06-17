@@ -26,235 +26,235 @@ const struct
     int max;			// Minimum value
 } option_table[] =
 {
-	{	'?',		"commandcharacter",		pt_char, opt_commandcharacter,
-		"The character to prefix internal mcl commands with",
+	{	'?',		(char *)"commandcharacter",		pt_char, opt_commandcharacter,
+         (char *)"The character to prefix internal mcl commands with",
 		'#',	'!',	 '~'
 	},
 
-    {	'?',		"escapecharacter",		pt_char, opt_escape_character,
-		"Lines starting with this character are passed as-is",
+    {	'?',		(char *)"escapecharacter",		pt_char, opt_escape_character,
+         (char *)"Lines starting with this character are passed as-is",
 		'\\',	'!',	 '~'
 	},
 
-	{	'w',		"histwordsize",			pt_int,	opt_histwordsize,
-		"Minimum number of chars in a command to save into history",
+	{	'w',		(char *)"histwordsize",			pt_int,	opt_histwordsize,
+         (char *)"Minimum number of chars in a command to save into history",
 		5, 1, 999
 		},
 
-	{	'l',		"scrollback",			pt_int, opt_scrollback_lines,
-		"Number of lines in scrollback",
+	{	'l',		(char *)"scrollback",			pt_int, opt_scrollback_lines,
+         (char *)"Number of lines in scrollback",
 		10000, 5000, 250000
 		 },
 
-	{	'H',		"histsize",				pt_int,	opt_histsize,
-		"Number of lines saved in the command history",
+	{	'H',		(char *)"histsize",				pt_int,	opt_histsize,
+         (char *)"Number of lines saved in the command history",
 		25, 5, 1000
 		 },
 	
-	{	's',		"showprompt",			pt_bool,opt_showprompt,
-		"Should the prompt be echoed on the main output screen?",
+	{	's',		(char *)"showprompt",			pt_bool,opt_showprompt,
+         (char *)"Should the prompt be echoed on the main output screen?",
 		false, false, true
 		 },
 		
-	{	'e',		"echoinput",			pt_bool,opt_echoinput,
-		"Should input be sent to MUD be echoed on the main output screen?",
+	{	'e',		(char *)"echoinput",			pt_bool,opt_echoinput,
+         (char *)"Should input be sent to MUD be echoed on the main output screen?",
 		false, false, true
 		},		
 
-	{	'b',		"beep",					pt_int,opt_beep,
-		"What frequency to beep with on errors? 0 disables, max 10",
+	{	'b',		(char *)"beep",					pt_int,opt_beep,
+         (char *)"What frequency to beep with on errors? 0 disables, max 10",
 		1, 0, 10
 		},		
 	
-	{	'r',		"readonly",				pt_bool, opt_readonly,
-		"If set, configuration file will not be saved on exiting",
+	{	'r',		(char *)"readonly",				pt_bool, opt_readonly,
+         (char *)"If set, configuration file will not be saved on exiting",
 		false, false, true
 	},
 
-    {	'r',		"nodefaults",	   		pt_bool, opt_nodefaults,
-		"If set, only options that do not equal their default are saved in the config file",
+    {	'r',		(char *)"nodefaults",	   		pt_bool, opt_nodefaults,
+         (char *)"If set, only options that do not equal their default are saved in the config file",
 		false, false, true
 	},
-    {	'r',		"save_history",	   		pt_bool, opt_save_history,
-		"Save the input history between sessions into ~/.mcl/history",
+    {	'r',		(char *)"save_history",	   		pt_bool, opt_save_history,
+         (char *)"Save the input history between sessions into ~/.mcl/history",
 		true, false, true
 	},
 	
-	{	'W',		"historywindow",		pt_int,	opt_historywindow,
-		"Number of lines in the pop-up history window. 0 disables",
+	{	'W',		(char *)"historywindow",		pt_int,	opt_historywindow,
+         (char *)"Number of lines in the pop-up history window. 0 disables",
 		10,	0,	25
 	},
 	
-	{	'B',		"mudbeep",				pt_bool,	opt_mudbeep,
-		"Should beeps from the MUD be honored?",
+	{	'B',		(char *)"mudbeep",				pt_bool,	opt_mudbeep,
+         (char *)"Should beeps from the MUD be honored?",
 		false, false, true
 	},
 	
-	{	'T',		"tabsize",				pt_int,		opt_tabsize,
-		"Tabstop size",
+	{	'T',		(char *)"tabsize",				pt_int,		opt_tabsize,
+         (char *)"Tabstop size",
 		8,	2,	16
 	},
 
-	{	'?',		"statcolor",			pt_hex,		opt_statcolor,
-		"Color of the stat window (activated with Alt-S); see README for values",
+	{	'?',		(char *)"statcolor",			pt_hex,		opt_statcolor,
+         (char *)"Color of the stat window (activated with Alt-S); see README for values",
 		bg_green|fg_red, 0, 255
 	},
 	
-	{	'?',		"inputcolor",			pt_hex,		opt_inputcolor,
-		"Color of the input line",
+	{	'?',		(char *)"inputcolor",			pt_hex,		opt_inputcolor,
+         (char *)"Color of the input line",
 		bg_cyan|fg_black, 0, 255
 	},
 	
-	{	'?',		"statuscolor",			pt_hex,		opt_statuscolor,
-		"Color of the status line",
+	{	'?',		(char *)"statuscolor",			pt_hex,		opt_statuscolor,
+         (char *)"Color of the status line",
 		bg_cyan|fg_black, 0, 255
 	},
 	
-	{	'?',		"autostatwin",			pt_bool,	opt_autostatwin,
-		"Automatically bring up the stat window",
+	{	'?',		(char *)"autostatwin",			pt_bool,	opt_autostatwin,
+         (char *)"Automatically bring up the stat window",
 		false, false, true
 	},
 	
-	{	'?',		"speedwalk",			pt_bool,	opt_speedwalk,
-		"Speedwalk enabled? (toggle in mcl with #enable speedwalk)",
+	{	'?',		(char *)"speedwalk",			pt_bool,	opt_speedwalk,
+         (char *)"Speedwalk enabled? (toggle in mcl with #enable speedwalk)",
 		true, false, true
 	},
 	
-	{	'?',		"timercolor",			pt_hex,		opt_timercolor,
-		"Color of timer window",
+	{	'?',		(char *)"timercolor",			pt_hex,		opt_timercolor,
+         (char *)"Color of timer window",
 		bg_cyan|fg_black,0,255
 	},
 	
-	{	'?',		"autotimerwin",			pt_bool,	opt_autotimerwin,
-		"Automatically bring up the clock/timer window",
+	{	'?',		(char *)"autotimerwin",			pt_bool,	opt_autotimerwin,
+         (char *)"Automatically bring up the clock/timer window",
 		true,	false,	true
 	},
 	
-	{	'?',		"timerstate",			pt_int,		opt_timerstate,
-		"Default timer state (from 0 to 6)",
+	{	'?',		(char *)"timerstate",			pt_int,		opt_timerstate,
+         (char *)"Default timer state (from 0 to 6)",
 		0,		0,		6
     },
 
-    {   '?',        "borg",                 pt_bool,    opt_borg,
-        "Check for a new version of mcl on startup",
+    {   '?',        (char *)"borg",                 pt_bool,    opt_borg,
+        (char *)"Check for a new version of mcl on startup",
         true,       false,  true
     },
 
-    {   '?',        "borg_verbose",         pt_bool,    opt_borg_verbose,
-        "If BORG is set, show some extra info to user",
+    {   '?',        (char *)"borg_verbose",         pt_bool,    opt_borg_verbose,
+        (char *)"If BORG is set, show some extra info to user",
         true,       false,  true
     },
 
-    {   'D',        "interp_debug",           pt_bool,    opt_interpdebug,
-        "Display debugging messages for embedded interpreter",
+    {   'D',        (char *)"interp_debug",           pt_bool,    opt_interpdebug,
+        (char *)"Display debugging messages for embedded interpreter",
         true,       false,  true
     },
 
-    {   '?',        "multiinput",           pt_bool,    opt_multiinput,
-        "Input line expands to multiple lines automatically",
+    {   '?',        (char *)"multiinput",           pt_bool,    opt_multiinput,
+        (char *)"Input line expands to multiple lines automatically",
         true,       false,  true
     },
 
-    {   '?',        "copyover",             pt_bool,     opt_copyover,
-        "Use the hot reconnect feature when using Alt-T",
+    {   '?',        (char *)"copyover",             pt_bool,     opt_copyover,
+        (char *)"Use the hot reconnect feature when using Alt-T",
         false,       false,   true
     },
 
-    {   '?',        "snarf_prompt", pt_bool, opt_snarf_prompt,
-        "Change the prompt when a new one is recieved",
+    {   '?',        (char *)"snarf_prompt", pt_bool, opt_snarf_prompt,
+        (char *)"Change the prompt when a new one is recieved",
         true, false, true
     },
 
-    {   '?',        "speedwalk_character", pt_char, opt_speedwalk_character,
-        "What character starts a speedwalk",
+    {   '?',        (char *)"speedwalk_character", pt_char, opt_speedwalk_character,
+        (char *)"What character starts a speedwalk",
         '^', '!', '~'
     },
 
-    {   '?',        "expand_semicolon", pt_bool, opt_expand_semicolon,
-        "Is ; expanded on the command line or just in aliases",
+    {   '?',        (char *)"expand_semicolon", pt_bool, opt_expand_semicolon,
+        (char *)"Is ; expanded on the command line or just in aliases",
         false, false, true
     },
 
-    {   'p',        "plugins",          pt_string, opt_plugins,
-        "Dynamically loaded modules (seperate with ,)",
+    {   'p',        (char *)"plugins",          pt_string, opt_plugins,
+        (char *)"Dynamically loaded modules (seperate with ,)",
         0,0,0,
     },
 
     // MudMaster/ZCHAT chat specific stuff
     {
-        '?',        "chat.name",       pt_string,    opt_chat_name,
-        "Your name in the MudMaster chat system (see doc/Chat). If set to nothing, chat is fully disabled",
+        '?',        (char *)"chat.name",       pt_string,    opt_chat_name,
+        (char *)"Your name in the MudMaster chat system (see doc/Chat). If set to nothing, chat is fully disabled",
         0,0,0
     },
     {
-        '?',        "chat.port",       pt_int,    opt_chat_baseport,
-        "Base port to listen on for MudMaster chat. mcl will try up to this+10 ports",
+        '?',        (char *)"chat.port",       pt_int,    opt_chat_baseport,
+        (char *)"Base port to listen on for MudMaster chat. mcl will try up to this+10 ports",
         4050, 1, 65535
     },
 
     {
-        '?',        "chat.autoaccept",       pt_bool,    opt_chat_autoaccept,
-        "Automatically accept all incoming chat connections or ask for confirmation?",
+        '?',        (char *)"chat.autoaccept",       pt_bool,    opt_chat_autoaccept,
+        (char *)"Automatically accept all incoming chat connections or ask for confirmation?",
         false, false, true
     },
 
     {
-        '?',        "chat.nodisturb",       pt_bool,    opt_chat_nodisturb,
-        "Automatically reject all incoming chat connections?",
+        '?',        (char *)"chat.nodisturb",       pt_bool,    opt_chat_nodisturb,
+        (char *)"Automatically reject all incoming chat connections?",
         false, false, true
     },
 
     {
-        '?',        "chat.debug",       pt_bool,    opt_chat_debug,
-        "Show extra debug information about chat requests?",
+        '?',        (char *)"chat.debug",       pt_bool,    opt_chat_debug,
+        (char *)"Show extra debug information about chat requests?",
         false, false, true
     },
 
     {
-        '?',        "chat.download",       pt_string,    opt_chat_download,
-        "Directory where files transferred via chat are placed (default: ~/.mcl/download/)",
+        '?',        (char *)"chat.download",       pt_string,    opt_chat_download,
+        (char *)"Directory where files transferred via chat are placed (default: ~/.mcl/download/)",
         0,0,0
     },
 
     {
-        '?',        "chat.email",       pt_string,    opt_chat_email,
-        "E-mail address displayed to others",
+        '?',        (char *)"chat.email",       pt_string,    opt_chat_email,
+        (char *)"E-mail address displayed to others",
         0,0,0
     },
 
     {
-        '?',        "chat.interfaces",       pt_string,    opt_chat_interfaces,
-        "What network interfaces should mcl look at to determine what IP address to use? Delimiter with space (default: ppp0 eth0 lo)",
+        '?',        (char *)"chat.interfaces",       pt_string,    opt_chat_interfaces,
+        (char *)"What network interfaces should mcl look at to determine what IP address to use? Delimiter with space (default: ppp0 eth0 lo)",
         0,0,0
     },
 
     {
-        '?',        "chat.icon",       pt_string,    opt_chat_icon,
-        "Icon file sent to others",
+        '?',      (char *)  "chat.icon",       pt_string,    opt_chat_icon,
+        (char *)"Icon file sent to others",
         0,0,0
     },
 
     {
-        '?',        "chat.protocol",       pt_bool,    opt_chat_protocol,
-        "0 to use standard Chat, 1 to use zChat",
+        '?',        (char *)"chat.protocol",       pt_bool,    opt_chat_protocol,
+        (char *)"0 to use standard Chat, 1 to use zChat",
         1,0,1
     },
 
     {
-        '?',        "chat.paranoia",       pt_bool,    opt_chat_paranoia,
-        "Prefix all messages with their source (e.g. [Drylock@127.0.0.1] Drylock chats 'hi'.",
+        '?',        (char *)"chat.paranoia",       pt_bool,    opt_chat_paranoia,
+        (char *)"Prefix all messages with their source (e.g. [Drylock@127.0.0.1] Drylock chats 'hi'.",
         0,0,1
     },
 
     {
-        '?',        "chat.chatcolor",       pt_hex,    opt_chat_chatcolor,
-        "Color of messages from others (e.g. CHAT: Drylock chats 'hullo'",
+        '?',        (char *)"chat.chatcolor",       pt_hex,    opt_chat_chatcolor,
+        (char *)"Color of messages from others (e.g. CHAT: Drylock chats 'hullo'",
         bg_black|fg_yellow|fg_bold, 0, 255
     },
 
     {
-        '?',        "chat.syscolor",       pt_hex,    opt_chat_syscolor,
-        "Color of system messages (e.g. CHAT: Connection to 127.0.0.1 failed)",
+        '?',       (char *) "chat.syscolor",       pt_hex,    opt_chat_syscolor,
+        (char *)"Color of system messages (e.g. CHAT: Connection to 127.0.0.1 failed)",
         bg_black|fg_white, 0, 255
     },
 
@@ -447,7 +447,7 @@ void Config::parseMUDLine(const char *keyword, const char *buf, MUD *mud) {
         Action *ac = Action::parse(buf, res, Action::Trigger);
         
         if (!ac)
-            error (res);
+            error("%s", res.operator const char *());
         
         mud->action_list.insert(ac);
     }
@@ -456,7 +456,7 @@ void Config::parseMUDLine(const char *keyword, const char *buf, MUD *mud) {
         Action *ac = Action::parse(buf, res, Action::Replacement);
         
         if (!ac)
-            error (res);
+            error ("%s", res.operator const char *());
         
         mud->action_list.insert(ac);
     } else

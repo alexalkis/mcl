@@ -101,12 +101,12 @@ int TTY::get_raw_key() {
 }
 
 // Supply the TI key name
-#define KEY(name,value) { key_ ## name, #name, value, NULL, NULL },
+#define KEY(name,value) { key_ ## name, (char *) #name, (char *) value, NULL, NULL },
 // Supply the raw key value
-#define EKEY(name,value) { key_ ## name, #name, NULL, value, NULL },
+#define EKEY(name,value) { key_ ## name, (char *) #name, NULL, (char *) value, NULL },
 
 // Supply both, either will work
-#define KEY2(name,value,value2) { key_ ## name, #name, value, NULL, value2 },
+#define KEY2(name,value,value2) { key_ ## name, (char *) #name, (char *) value, NULL, (char *) value2 },
 
 // fucking terminfo/termcap. why isn't the xterm terminfo correct?
 static struct
