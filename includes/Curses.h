@@ -1,6 +1,7 @@
 void init_curses(bool);
 void set_title(const char*); // set xterm title
 const char *lookup_key(const char *); // kf1-> whatver f1 key should return
+void done_curses();
 
 extern char special_chars[];
 extern char real_special_chars[];

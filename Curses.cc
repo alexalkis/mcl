@@ -77,7 +77,7 @@ void init_curses(bool virtualConsole) {
     }
 
     // The change-titlebar capability, is that in
-    if (!strcmp(term, "rxvt") || !strcmp(term, "xterm"))
+    if (!strcmp(term, "rxvt") || !strcmp(term, "xterm") || strstr(term, "xterm"))
         xterm = true;
 
 }
@@ -92,4 +92,5 @@ void set_title(const char *s) {
 }
 
 void done_curses() {
+    set_title("");
 }

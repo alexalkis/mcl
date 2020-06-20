@@ -309,6 +309,7 @@ bool Screen::refreshTTY() {
 Screen::~Screen() {
     if (usingVirtual)
         close (fd);
+    done_curses();
 }
 
 void Screen::set_cursor(int _x, int _y) {

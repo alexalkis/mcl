@@ -9,14 +9,14 @@
 
 StatusLine::StatusLine(Window *_parent)
 	: Window(_parent, wh_full,1),
-		message(NULL), end_time(0) 
+		message(NULL), end_time(0), seen_key(false)
 {
   sticky_status = false;
 }
 
 void StatusLine::idle()
 {	
-	if (message && current_time > end_time && !sticky_status)
+	if (message && current_time > end_time && seen_key && !sticky_status)
 	{
 		free(message);
 		message = NULL;
@@ -24,6 +24,12 @@ void StatusLine::idle()
 	}
 }
 
+/// TODO: Maybe have seen_key logic dependent on a config option?
+bool StatusLine::keypress(int key) {
+    //return Window::keypress(key);
+    seen_key = true;
+    return false;
+}
 
 // Set the status line (using a formatted string)
 void StatusLine::setf(const char *fmt ...)
@@ -44,6 +50,7 @@ void StatusLine::set(const char *s)
     
     message = strdup(s);
     end_time = current_time + STATUSLINE_TIMEOUT;
+    seen_key = false;
     show(true);
 }
 

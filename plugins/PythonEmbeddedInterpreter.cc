@@ -16,7 +16,7 @@ extern "C" const char* initFunction(const char*) {
 }
 
 extern "C" const char* versionFunction() {
-    return "Python embedded interpreter";
+    return "Python embedded interpreter (" __DATE__ ")";
 }
 
 
