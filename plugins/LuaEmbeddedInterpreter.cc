@@ -3,6 +3,8 @@ extern "C"
 #include <lualib.h>
 #include <lauxlib.h>
 }
+
+
 #include "mcl.h"
 #include "Pipe.h"
 #include "Interpreter.h"
@@ -107,7 +109,7 @@ bool LuaEmbeddedInterpreter::run(const char *function, const char *args,
 //    str = get_string("default_var");
 //    strcpy(result, str);
 //  }
-  return true;
+  return false;
 }
 
 bool LuaEmbeddedInterpreter::run_quietly(const char *file, const char *args,
@@ -128,7 +130,7 @@ bool LuaEmbeddedInterpreter::run_quietly(const char *file, const char *args,
 //  }
 //
 //  return run(func, args, result);
-    return true;
+    return false;
 }
 
 void *LuaEmbeddedInterpreter::match_prepare(const char *pattern,
@@ -190,57 +192,66 @@ bool LuaEmbeddedInterpreter::match(void *code, const char *match_str,
 //
 //    return (*str) ? true : false;
 //  }
-    return true;
+    return false;
 }
 
 void LuaEmbeddedInterpreter::set(const char *name, int value)
 {
-//  PyObject *obj = Py_BuildValue("i", value);
-//
-//  if(!obj) {
-//    PyErr_Print();
-//    return;
-//  }
-//  PyDict_SetItemString(globals, (char*)name, obj);
-//  Py_DECREF(obj);
+//    char buf[2048];
+//    snprintf(buf, sizeof(buf), "%s=%d", name, value);
+//    if (luaL_dostring(L, buf) != 0) {
+//        report("lua: %s\n", lua_tostring(L, -1));
+//        return;
+//    }
+    lua_pushinteger(L,value);
+    lua_setglobal(L,name);
 }
 
 void LuaEmbeddedInterpreter::set(const char *name, const char *value)
 {
-//  PyObject *obj = Py_BuildValue("s", value);
-//
-//  if(!obj) {
-//    PyErr_Print();
-//    return;
-//  }
-//  PyDict_SetItemString(globals, (char*)name, obj);
-//  Py_DECREF(obj);
+//    char buf[2048];
+//    snprintf(buf, sizeof(buf), "%s='%s'", name, value);
+//    if (luaL_dostring(L, buf) != 0) {
+//        report("lua: %s\n", lua_tostring(L, -1));
+//        return;
+//    }
+    lua_pushstring(L,value);
+    lua_setglobal(L,name);
 }
 
 int LuaEmbeddedInterpreter::get_int(const char *name)
 {
-//  PyObject *obj = PyDict_GetItemString(globals, (char*)name);
-//  int i;
-//
-//  if(!obj) {
-//    PyErr_Print();
-//    return 0;
-//  }
-//  PyArg_Parse(obj, "i", &i);
-//  return i;
+    bool found;
+    int val = 0;
+
+    lua_getglobal(L, name);
+    found = lua_isnumber(L, -1);
+    if(!found) {
+        report("LUA: can't find variable %s\n", name);
+        return val;
+    }
+    // Fetch value
+    val = lua_tointeger(L, -1);
+    lua_pop(L, 1);
+    return val;
 }
 
 char *LuaEmbeddedInterpreter::get_string(const char *name)
 {
-//  PyObject *obj = PyDict_GetItemString(globals, (char*)name);
-//  char *str;
-//
-//  if(!obj) {
-//    PyErr_Print();
-//    return 0;
-//  }
-//  PyArg_Parse(obj, "s", &str);
-//  return str;
+    bool found;
+    char *val = (char *) "";
+
+    // Check if value is in file
+    lua_getglobal(L, name);
+    found = lua_isnumber(L, -1);
+    if(!found) {
+        report("LUA: can't find variable %s\n", name);
+        return val;
+    }
+    // Fetch value
+    val = (char *) lua_tostring(L, -1);
+    lua_pop(L, 1);
+    return val;
 }
 
 /*
