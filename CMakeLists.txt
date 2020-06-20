@@ -10,6 +10,7 @@ find_package(PerlLibs REQUIRED)
 #FIND_PACKAGE(PerlLibs)
 
 find_package(Python2 COMPONENTS Development)
+find_package(Lua REQUIRED)
 
 message( "Main cmakefile Perl includes: " ${PERL_INCLUDE_PATH})
 message( "Main cmakefile Python library: "  ${Python2_LIBRARIES})
@@ -57,6 +58,7 @@ set(SOURCE_FILES
     includes/Plugin.h
     includes/ProxyWindow.h
     includes/PythonEmbeddedInterpreter.h
+    includes/LuaEmbeddedInterpreter.h
     includes/Screen.h
     includes/ScrollbackSearch.h
     includes/Selectable.h

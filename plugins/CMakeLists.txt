@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.7)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 set(perlSrc PerlEmbeddedInterpreter.cc)
 set(pythonSrc PythonEmbeddedInterpreter.cc)
+set(luaSrc LuaEmbeddedInterpreter.cc)
 
 FIND_PACKAGE(PkgConfig)
 include_directories (${PKGS_INCLUDE_DIRS})
@@ -12,6 +13,7 @@ include_directories(../includes ${Python2_INCLUDE_DIRS})
 
 add_library(mpython SHARED ${pythonSrc})
 add_library(mperl SHARED ${perlSrc})
+add_library(mlua SHARED ${luaSrc})
 
 #message( "What?"  ${Python_LIBRARIES})
 
@@ -37,8 +39,17 @@ add_custom_command(TARGET mperl POST_BUILD
 target_link_libraries(mpython
         ${Python2_LIBRARIES})
 
+target_link_libraries(mlua ${LUA_LIBRARIES})
+
+
 add_custom_command(TARGET mpython POST_BUILD
         COMMAND "${CMAKE_COMMAND}" -E copy
         "$<TARGET_FILE:mpython>"
         "$ENV{HOME}/.mcl/plugins/python.so"
         COMMENT "Copying to python.so output directory")
+
+add_custom_command(TARGET mlua POST_BUILD
+        COMMAND "${CMAKE_COMMAND}" -E copy
+        "$<TARGET_FILE:mlua>"
+        "$ENV{HOME}/.mcl/plugins/lua.so"
+        COMMENT "Copying to lua.so output directory")
