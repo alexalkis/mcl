@@ -16,7 +16,7 @@ extern "C" const char* initFunction(const char *) {
 }
 
 extern "C" const char* versionFunction() {
-    return "Perl embedded interpreter";
+    return "Perl embedded interpreter (" __DATE__ ")";
 }
 
 
