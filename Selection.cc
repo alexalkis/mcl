@@ -179,10 +179,13 @@ const char * MUDSelection::getData(int no) {
 	MUD *mud = (*config->mud_list)[no];
 
     if (mud) {
-        if (strlen(mud->getHostname()))
-            snprintf (buf, min(width,256), "%-10s %-35s %4d %s", ~mud->name, mud->getHostname(), mud->getPort(), ~mud->commands);
-        else
-            snprintf (buf, min(width,256), "%s", ~mud->name);
+        if (strlen(mud->getHostname())) {
+          char hp[40];
+          snprintf(hp, 40, "%s:%d", mud->getHostname(), mud->getPort());
+          snprintf (buf, min(width,256), "%-10s %-40s %s", ~mud->name, hp, ~mud->commands);
+        } else {
+          snprintf(buf, min(width, 256), "%s", ~mud->name);
+        }
         return buf;
     } else
         return "";
