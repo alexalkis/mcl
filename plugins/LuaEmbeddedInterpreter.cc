@@ -39,16 +39,19 @@ LuaEmbeddedInterpreter::~LuaEmbeddedInterpreter() {
 
 bool LuaEmbeddedInterpreter::load_file(const char *file, bool suppress)
 {
-  FILE *script = nullptr;
+  FILE *script= nullptr;
   const char *fullname = findFile(file, ".lua");
 
-  if (!(fullname = findFile(file, ".lua")) || (!(script = fopen(fullname, "r")))) {
+  if (!(fullname) || (!(script = fopen(fullname, "r")))) {
       if (config->getOption(opt_interpdebug) && !suppress)
           report("@@ Loading %s = %m", file);
       return false;
   }
 
   int status = luaL_loadfile(L, (char*)fullname);
+
+  fclose(script);
+
   if(status) {
     if(config->getOption(opt_interpdebug) && !suppress) {
         const char *msg;
@@ -64,13 +67,15 @@ bool LuaEmbeddedInterpreter::load_file(const char *file, bool suppress)
 
 void LuaEmbeddedInterpreter::eval(const char *expression, char *result)
 {
-//  PyObject *obj;
-//
-//  if(result) *result = '\0';
-//  if(expression && !*expression) return;
-//  if(!(obj = PyRun_String((char*)expression, Py_file_input, globals, globals)))
-//    PyErr_Print();
-//  else Py_DECREF(obj);
+    if(result) *result = '\0';
+    if(expression && !*expression) return;
+
+    int error = luaL_loadbuffer(L, expression, strlen(expression), "eval code") ||
+            lua_pcall(L, 0, 0, 0);
+    if (error) {
+        report("%s", lua_tostring(L, -1));
+        lua_pop(L, 1);  /* pop error message from the stack */
+    }
 }
 
 bool LuaEmbeddedInterpreter::run(const char *function, const char *args,
