@@ -118,6 +118,7 @@ target_link_libraries(mcl
         python2.7
         mperl
         mpython
+        mlua
         )
 
 add_subdirectory(plugins)
