@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.7)
 
 
-set(CMAKE_VERBOSE_MAKEFILE ON)
+#set(CMAKE_VERBOSE_MAKEFILE ON)
 set(perlSrc PerlEmbeddedInterpreter.cc)
 set(pythonSrc PythonEmbeddedInterpreter.cc)
 set(luaSrc LuaEmbeddedInterpreter.cc)
@@ -34,7 +34,7 @@ add_custom_command(TARGET mperl POST_BUILD
         COMMAND "${CMAKE_COMMAND}" -E copy
         "$<TARGET_FILE:mperl>"
         "$ENV{HOME}/.mcl/plugins/perl.so"
-        COMMENT "Copying perl.so to output directory")
+        COMMENT "Copying to ~/.mcl/plugins/perl.so")
 
 target_link_libraries(mpython
         ${Python2_LIBRARIES})
@@ -46,10 +46,10 @@ add_custom_command(TARGET mpython POST_BUILD
         COMMAND "${CMAKE_COMMAND}" -E copy
         "$<TARGET_FILE:mpython>"
         "$ENV{HOME}/.mcl/plugins/python.so"
-        COMMENT "Copying to python.so output directory")
+        COMMENT "Copying to ~/.mcl/plugins/python.so")
 
 add_custom_command(TARGET mlua POST_BUILD
         COMMAND "${CMAKE_COMMAND}" -E copy
         "$<TARGET_FILE:mlua>"
         "$ENV{HOME}/.mcl/plugins/lua.so"
-        COMMENT "Copying to lua.so output directory")
+        COMMENT "Copying to ~/.mcl/plugins/lua.so")

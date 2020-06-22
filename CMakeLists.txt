@@ -12,8 +12,9 @@ find_package(PerlLibs REQUIRED)
 find_package(Python2 COMPONENTS Development)
 find_package(Lua REQUIRED)
 
-message( "Main cmakefile Perl includes: " ${PERL_INCLUDE_PATH})
-message( "Main cmakefile Python library: "  ${Python2_LIBRARIES})
+message( "Main cmakefile Perl version: " ${PERL_VERSION_STRING})
+message( "Main cmakefile Python version: "  ${Python2_VERSION})
+message( "Main cmakefile Lua version: "  ${LUA_VERSION_STRING})
 #find_package(SQLite3 REQUIRED)
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
