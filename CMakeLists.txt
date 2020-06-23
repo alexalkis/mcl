@@ -3,14 +3,33 @@ cmake_minimum_required(VERSION 3.7)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 project(mcl)
 
-### Check Perl headers and libs ###
-find_package(Perl REQUIRED)
-find_package(PerlLibs REQUIRED)
-#find_package(PerlModules COMPONENTS ExtUtils::Embed REQUIRED)
-#FIND_PACKAGE(PerlLibs)
+set(CURSES_NEED_NCURSES True)
+find_package(Curses REQUIRED)
 
+find_package(Perl)
+find_package(PerlLibs)
 find_package(Python2 COMPONENTS Development)
-find_package(Lua REQUIRED)
+find_package(Lua)
+
+message("Curses: " ${CURSES_LIBRARIES})
+if(Python2_FOUND)
+    option(ENABLE_Python_plugins "Turn on Plugins that depend on python existing" ${Python2_FOUND})
+    message("Python plugin: " ${ENABLE_Python_plugins})
+endif()
+
+if(PERLLIBS_FOUND)
+    include_directories(includes ${PERL_INCLUDE_PATH})
+    option(ENABLE_Perl_plugins "Turn on Plugins that depend on perl existing" ${PERLLIBS_FOUND})
+    message("Perl plugin: " ${ENABLE_Perl_plugins})
+endif()
+
+if(LUA_FOUND)
+    option(ENABLE_Lua_plugins "Turn on Plugins that depend on lua existing" ${LUA_FOUND})
+    message("Lua plugin: " ${ENABLE_Lua_plugins})
+endif()
+#find_package(FindSDL_mixer)
+
+
 
 message( "Main cmakefile Perl version: " ${PERL_VERSION_STRING})
 message( "Main cmakefile Python version: "  ${Python2_VERSION})
@@ -20,7 +39,7 @@ message( "Main cmakefile Lua version: "  ${LUA_VERSION_STRING})
 
 
 set(CMAKE_CXX_STANDARD 11)
-include_directories(includes ${PERL_INCLUDE_PATH})
+
 set(SOURCE_FILES
     includes/Action.h
     includes/Alias.h
@@ -115,11 +134,26 @@ target_link_libraries(mcl
         z
         pthread
         m
-        perl
-        python2.7
-        mperl
-        mpython
-        mlua
         )
 
+if(ENABLE_Python_plugins)
+    target_link_libraries(
+            mcl
+            python2.7
+            mpython
+    )
+endif()
+if(ENABLE_Perl_plugins)
+    target_link_libraries(
+            mcl
+            perl
+            mperl
+    )
+endif()
+if(ENABLE_Lua_plugins)
+    target_link_libraries(
+            mcl
+            mlua
+    )
+endif()
 add_subdirectory(plugins)

@@ -21,8 +21,8 @@ set_target_properties(mperl PROPERTIES PREFIX "")
 set_target_properties(mpython PROPERTIES PREFIX "")
 
 execute_process(COMMAND ${PERL_EXECUTABLE} -MExtUtils::Embed -e ldopts OUTPUT_VARIABLE PERL_LINKER_FLAGS OUTPUT_STRIP_TRAILING_WHITESPACE)
-message("perl-link-variable: " ${PERL_LINKER_FLAGS})
-message("perl-variable: " ${PERL_LIBRARY})
+#message("perl-link-variable: " ${PERL_LINKER_FLAGS})
+#message("perl-variable: " ${PERL_LIBRARY})
 # perl -MExtUtils::Embed -e ldopts
 #set_target_properties(mperl PROPERTIES LINK_FLAGS "-s -rdynamic -shared -Wl,-E  -fstack-protector-strong -L/usr/local/lib  -L/usr/lib/x86_64-linux-gnu/ -lperl -ldl -lm -lpthread -lc -lcrypt")
 set_target_properties(mperl PROPERTIES LINK_FLAGS "-rdynamic -shared ${PERL_LINKER_FLAGS}")
