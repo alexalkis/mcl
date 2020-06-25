@@ -3,6 +3,20 @@ cmake_minimum_required(VERSION 3.7)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 project(mcl)
 
+FIND_PACKAGE(PkgConfig)
+
+find_package(SDL2)
+if(SDL2_FOUND)
+    # Using an underscore like SDL2_mixer doesn't work
+    pkg_check_modules(SDL2mixer REQUIRED SDL2_mixer)
+    #message("----->" ${SDL2mixer_FOUND})
+    #message(${SDL2mixer_INCLUDE_DIRS})
+    #message(${SDL2mixer_LIBRARIES})
+else()
+    message("SDL2 not installed.  No sound.")
+endif()
+
+
 set(CURSES_NEED_NCURSES True)
 find_package(Curses REQUIRED)
 
@@ -11,7 +25,7 @@ find_package(PerlLibs)
 find_package(Python2 COMPONENTS Development)
 find_package(Lua)
 
-message("Curses: " ${CURSES_LIBRARIES})
+#message("Curses: " ${CURSES_LIBRARIES})
 if(Python2_FOUND)
     option(ENABLE_Python_plugins "Turn on Plugins that depend on python existing" ${Python2_FOUND})
     message("Python plugin: " ${ENABLE_Python_plugins})
@@ -27,7 +41,9 @@ if(LUA_FOUND)
     option(ENABLE_Lua_plugins "Turn on Plugins that depend on lua existing" ${LUA_FOUND})
     message("Lua plugin: " ${ENABLE_Lua_plugins})
 endif()
-#find_package(FindSDL_mixer)
+
+
+
 
 
 

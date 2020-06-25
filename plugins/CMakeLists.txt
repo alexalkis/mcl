@@ -6,7 +6,7 @@ set(perlSrc PerlEmbeddedInterpreter.cc)
 set(pythonSrc PythonEmbeddedInterpreter.cc)
 set(luaSrc LuaEmbeddedInterpreter.cc)
 
-FIND_PACKAGE(PkgConfig)
+
 include_directories (${PKGS_INCLUDE_DIRS})
 include_directories(../includes ${Python2_INCLUDE_DIRS} ${LUA_INCLUDE_DIR})
 
