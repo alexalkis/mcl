@@ -41,3 +41,6 @@ On the `before launch` section, click the `+` button and add `run external tool`
 -c $ProjectFileDir$ /usr/bin/konsole -e gdbserver 127.0.0.1:2159 $ProjectFileDir$/cmake-build-debug/mcl
 ###### Working Directory
 $ProjectFileDir$
+
+<br><br>
+You might need to install gdbserver as well (sudo apt install gdbserver)
