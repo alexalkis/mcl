@@ -1,5 +1,5 @@
 // A control is an invisible window, probably catching keypresses
-
+#include "Window.h"
 
 class Control : public Window
 {

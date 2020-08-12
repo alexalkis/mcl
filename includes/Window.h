@@ -1,3 +1,5 @@
+#ifndef MY_WINDOW_H
+#define MY_WINDOW_H
 //
 // Generic window
 //
@@ -120,3 +122,5 @@ class ScrollableWindow : public Window {
     virtual bool scroll();
     NAME(ScrollableWindow);
 };
+
+#endif
