@@ -8,7 +8,7 @@ set(luaSrc LuaEmbeddedInterpreter.cc)
 
 
 include_directories (${PKGS_INCLUDE_DIRS})
-include_directories(../includes ${Python2_INCLUDE_DIRS} ${LUA_INCLUDE_DIR})
+include_directories(../includes ${Python3_INCLUDE_DIRS} ${LUA_INCLUDE_DIR})
 
 
 add_library(mpython SHARED ${pythonSrc})
@@ -37,7 +37,7 @@ add_custom_command(TARGET mperl POST_BUILD
         COMMENT "Copying to ~/.mcl/plugins/perl.so")
 
 target_link_libraries(mpython
-        ${Python2_LIBRARIES})
+        ${Python3_LIBRARIES})
 
 target_link_libraries(mlua ${LUA_LIBRARIES})
 

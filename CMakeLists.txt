@@ -28,12 +28,12 @@ find_package(Curses REQUIRED)
 
 find_package(Perl)
 find_package(PerlLibs)
-find_package(Python2 COMPONENTS Development)
+find_package(Python3 COMPONENTS Development)
 find_package(Lua)
 
 #message("Curses: " ${CURSES_LIBRARIES})
-if(Python2_FOUND)
-    option(ENABLE_Python_plugins "Turn on Plugins that depend on python existing" ${Python2_FOUND})
+if(Python3_FOUND)
+    option(ENABLE_Python_plugins "Turn on Plugins that depend on python existing" ${Python3_FOUND})
     message("Python plugin: " ${ENABLE_Python_plugins})
 endif()
 
@@ -161,7 +161,7 @@ target_link_libraries(mcl
 if(ENABLE_Python_plugins)
     target_link_libraries(
             mcl
-            python2.7
+            python3.10
             mpython
     )
 endif()
