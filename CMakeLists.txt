@@ -161,7 +161,7 @@ target_link_libraries(mcl
 if(ENABLE_Python_plugins)
     target_link_libraries(
             mcl
-            python3.10
+            python3.12
             mpython
     )
 endif()
